@@ -33,7 +33,7 @@
     let controls = new OrbitControls(camera, canvas);
     controls.enableDamping = false;
 
-    controls.autoRotate = true;
+    controls.autoRotate = false;
 
     let splats = new LumaSplatsThree({
         source: 'https://lumalabs.ai/capture/2c2f462b-be1a-4d0d-bf74-0975dba73d49',
@@ -49,7 +49,7 @@
         });
     }
 
-    // splats.semanticsMask = LumaSplatsSemantics.FOREGROUND;
+    splats.semanticsMask = LumaSplatsSemantics.FOREGROUND;
     // splats.semanticsMask = LumaSplatsSemantics.BACKGROUND;
 
     // scene.fog = new FogExp2(new Color(0xe0e1ff).convertLinearToSRGB(), 0.15);
