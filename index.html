@@ -1,9 +1,12 @@
 <head>
-    <title>5902 robot 2024</title>
-    <script>        
+    <title>NeRF model renderer</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAeCAYAAADdGWXmAAAAAXNSR0IArs4c6QAABYJJREFUSEutl3tQVFUcx7/nPpdFdmE1QBQVZcBBxUIMMR9raDo644Ps5UzlW5v6p2nKVDTNmfqjaaop+2cdoSknyHLG0XwDjrDGQ3ksiJjhMzEyyzJee+85J+/uXmZBYKHamTs7c8+5v8/5vb73dwkG9xMApAGIBnAaQNtgHieD2JzgCBeWOlOl5Q67EONu0A9fvKEXAKgAQAdiZyAwuygia3qi8uLMiXLW3DQpYkSsgNJGLy/2aHWF5/SC23fZQQAXQgH7gykApqcMl5+fPV5emDVZic9IkaCEcQgqB1EZbvxOcbLK217ioe6icj2/rQOHAbT0Be0NZtxLibNJz8xMVJc6k5VU5ySZ2OyAoDIfyIQZ/1AY6q9RHKvQ7hSVs5Nl1fTbB4c8AaC1J7QnbIRdFhZnjLJkz0pUZmalqOqIaMEHIT7IwzDzXgdhqLhAcbREbzrl5ocu/cS+A1AGQDehJiziQXU5p8RYXpiVYJnvHKc6Jo6SIXYZDw0jFv9B7rVTFFcyerSQnjtWyA/c/QPfm/k0YGlJkerqJ+Isi+YkhI1Jj1egWo2cBHsycJgZhavNFEeKeOvpUlZy7ATyNQ1fGrDlG1KiPliZYueOSCT4c9LT+OBhhg3I/P6+/ezWp5/zsqoarPPBNqU7XKsm2O0EqCThbJxoYUP/o2dcUHk5GE9yl3PH6zk0r6YuANuc6XCtSrVFBhLZTiRWJdrYVEFlSu+e+kvfXPNVZyBnosIaucQUwjDWsOeu5Hhjl55XcwFrfZ5tmRHlWp0WYcJ8TAL8Qqy0RbKxyYJlQGFsEVV2HYw/Hlzy7iqGN9+neTWNLACbY3etndod1vWAgEYpUlfFCJbQR+m3CxZaJYo8HRxqz94qrWZ46yMtt/ZSALZ1nt21LnNIN896PMSIjPNydGeyaOU2s6lFC68RFX0kAR/Wl2q4PQybPvPm1l42YQttrvUzwvuDmbb+EsPZRSVWi1KsukAISwylh6X1FFtcnXm1TWy1kbOncxZH7NngtIaEGZsNwSRDdU0M12XCeCgW3A0Um/Pac+uusTU+2PbsiD0bssL6hUkckCjxiQ8bRkEidQiEg9/ngNa3nrsbdWz9uiO37jr1w955NnzPxvm9w4y3pagTEMNgAMYfoYBd95e+wsD/JtBvi72+1dw/6sjZ35Zbf4v6w7hjhdX1yiJLVHBMjAVBB4gmALrhURAsWgdstFufQWSgN2V4r0tAUHTPNmnYdrA1t77ZhL1kdb26RO2CEQYInQTchPSExerAkO4ws6l5G0F7lQK9RfKd3X1Vw47jbXvrmzV/GHeusbhey1ajDAi8gj8HOvqGDdeB8N5hpq7qtyS0FofhjIdiZ1Hr3voWPyw7Z6Wyb+UCi8VhCQpZvzANCO9droJFXNOBgo9lfPKVnlfbrK0yYKlzJyvbp6QISzKSJSkzWYZKQngWpwHWvmFQOBquUJwqBPNUkOr8U/p7lOKAWbNWALNXOC27kuJJ2vQkmaSNkUB81Rd0BaoRIzXwgPCaEmbm7Nc/KY6XMHjK8fOhM+yTm7+xbwDcCOhtt74cHm0Tli2fpWxLjBFjn0xREG8XH6pGxHvBA7OICWsHw1mPDncJ7p8uo1+ca6J5AKoBGJVginuvIpD82FhpvfNRceP4YYp13ngVdkXo6jMy2gsm+wcfLjPUXNFR7GZa5Xl+4niddzeAIgCdoQae4HUZQMaSacrmCfHigvRYVchMUKBwAjLGCyZx3yhXWKFxTx1v2P9D54cd1DfK3RnMKNdzrw1A1stPqe8mRcoTZsSrJG4SRWGthupq1nKkRtt9856eD+ByKKEcyERs2hg9KlZ4btk05W3uheiuoQXnm7W9ACr/z/G7p4oZHxYx/+bD4h8JkNhUuTPB4wAAAABJRU5ErkJggg==" />
+    <script>
+        function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
+	
         var option_fog = "000-0"; // hexcolor-value - (do not include #)
         var option_mode = "object"; // object, back, full - defines what to focus on (eg: object = remove background)
-        var option_source = "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
+        var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
         var option_damping = false;
         var option_performance = false; // does not work
 	var option_hint = true;
@@ -11,82 +14,125 @@
     <style>
         body {
             background-color: black;
+            color: white;
             margin: 0px;
             overflow: hidden;
+            font-family: 'Raleway', sans-serif;
+            display: table;
+            text-align: center;
         }
         #render {
             width: 100%;
             height: 100%;
         }
+        .start {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+        }
+        .start::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url(https://source.unsplash.com/random);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            filter: blur(40px) brightness(0.3);
+            z-index: -1;
+        }
+        .startingmessage {
+            border: 2px dashed grey;
+            pointer-events: none;
+            color: lightgrey;
+            position: fixed;
+            border-radius: 10px;
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            margin: 20px;
+            top: 0px;
+            left: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .innertext {
+            position: absolute;
+            pointer-events: none;
+            font-size: 150%;
+        }
+        
         @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i');
 
         @keyframes bounceOutRight {
-        0% {
-            opacity: 1;
-        }
-        25% {
-            opacity: 1;
-            transform: translate3d(-40px, 0, 0);
-        }
-        100% {
-            opacity: 0;
-            transform: translate3d(400px, 0, 0);
-        }
+            0% {
+                opacity: 1;
+            }
+            25% {
+                opacity: 1;
+                transform: translate3d(-40px, 0, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: translate3d(400px, 0, 0);
+            }
         }
         @keyframes bounceInLeft {
-        20% {
-            opacity: 0;
-            transform: translate3d(400px, 0, 0);
+            20% {
+                opacity: 0;
+                transform: translate3d(400px, 0, 0);
+            }
+            70% {
+                opacity: 1;
+                transform: translate3d(-20px, 0, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
         }
-        70% {
-            opacity: 1;
-            transform: translate3d(-20px, 0, 0);
-        }
-        100% {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
         }
 
         .bounceOutRight {
-        animation: bounceOutRight 0.6s;
-        }
-
-        html, body{
-        height:100%;
-        width:100%;
-        font-family: 'Raleway', sans-serif;
-        background-color:#000;
-        display: table;
-        text-align: center;
-
+            animation: bounceOutRight 0.6s;
         }
         
         .toast__container {
-        display: table-cell;
-        vertical-align: middle;
-        right: 10px;
-        position: fixed;
-        top: 0px;
-        display:inline-block;
+            display: table-cell;
+            vertical-align: middle;
+            right: 10px;
+            position: fixed;
+            top: 0px;
+            display:inline-block;
         }
 
         .toast__cell{
-        opacity: 0;
-        animation: bounceInLeft 0.6s ease forwards;
-        animation-fill-mode: forwards;
+            opacity: 0;
+            animation: bounceInLeft 0.6s ease forwards;
+            animation-fill-mode: forwards;
         }
 
         .add-margin{
-        margin-top:20px;
+            margin-top:20px;
         }
 
         .toast__svg{
-        fill:#fff;
+            fill:#fff;
         }
 
         .toast {
-        text-align:left;
+            text-align:left;
             padding: 21px 0;
             background-color: #333;
             border-radius:4px;
@@ -103,40 +149,40 @@
             left: 0;
             width: 4px;
             height: 100%;
-        border-top-left-radius:4px;
-        border-bottom-left-radius: 4px;
+            border-top-left-radius:4px;
+            border-bottom-left-radius: 4px;
 
         }
 
         .toast__icon{
-        position:absolute;
-        top:50%;
-        left:22px;
-        transform:translateY(-50%);
-        width:14px;
-        height:14px;
-        padding: 7px;
-        border-radius:50%;
-        display:inline-block;
+            position:absolute;
+            top:50%;
+            left:22px;
+            transform:translateY(-50%);
+            width:14px;
+            height:14px;
+            padding: 7px;
+            border-radius:50%;
+            display:inline-block;
         }
 
         .toast__type {
-        color: #fff;
-        font-weight: 700;
-        margin-top: 0;
-        margin-bottom: 8px;
+            color: #fff;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 8px;
         }
 
         .toast__message {
             font-size: 14px;
             margin-top: 0;
-        margin-bottom: 0;
+            margin-bottom: 0;
             color: #9f9f9f;
         }
 
         .toast__content{
-        padding-left:70px;
-        padding-right:60px;
+            padding-left:70px;
+            padding-right:60px;
         }
 
         .toast__close {
@@ -151,50 +197,63 @@
         }
 
         .toast--green .toast__icon{
-        background-color:#2BDE3F;
+            background-color:#2BDE3F;
         }
 
         .toast--green:before{
-        background-color:#2BDE3F;
+            background-color:#2BDE3F;
         }
 
         .toast--blue .toast__icon{
-        background-color:#1D72F3;
+            background-color:#1D72F3;
         }
 
         .toast--blue:before{
-        background-color:#1D72F3;
+            background-color:#1D72F3;
         }
 
         .toast--yellow .toast__icon{
-        background-color:#FFC007;
+            background-color:#FFC007;
         }
 
         .toast--yellow:before{
-        background-color:#FFC007;
+            background-color:#FFC007;
         }
 
         .toast--red .toast__icon{
-        background-color:rgb(221, 40, 40);
+            background-color:rgb(221, 40, 40);
         }
 
         .toast--red:before{
-        background-color:rgb(221, 40, 40);
+            background-color:rgb(221, 40, 40);
         }
 
         .toast--grey:before{
-        background-color:grey;
+            background-color:grey;
         }
         
         .toast--grey .toast__icon{
-        background-color:grey;
+            background-color:grey;
         }
-            </style>
+    </style>
 </head>
 <body>
     <canvas id="render"></canvas>
-    <div class="toast__container"></div>
+    <div onclick="start();" class="start">
+        <p class="startingmessage"><span class="innertext">Click to load model</span></p>
+    </div>
 
+    <div class="toast__container"></div>
+    <script>
+        function start() {
+            main();
+            var elm = document.querySelector('.start')
+            elm.style.animation = 'fadeOut 0.6s';
+            setTimeout(() => {
+                elm.remove();
+            }, 550);
+        }
+    </script>
     <script>
     function notify(type, title, content) {
         const toastCell = document.createElement('div');
@@ -336,80 +395,99 @@
     }
     </script>
     <script type="module">
-        // if (!option_fog && !option_performance) {
-        //     option_fog = "000-0";
-        // }
-        if (!option_source) {
-            option_source = "/83e9aae8-7023-448e-83a6-53ccb377ec86";
-        }
-
         import { WebGLRenderer, PerspectiveCamera, Scene, Color, FogExp2 } from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         import { LumaSplatsSemantics, LumaSplatsThree } from "@lumaai/luma-web";
 
-        let canvas = document.querySelector('canvas');
+        function ismobile(){
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
 
-        let renderer = new WebGLRenderer({
-            canvas: canvas,
-            antialias: false,
-            enableThreeShaderIntegration: !option_performance
-        });
-
-        renderer.setSize(window.innerWidth, window.innerHeight, false);
-
-        let scene = new Scene();
-
-        let camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(2, 1.3, 4);
-
-        let controls = new OrbitControls(camera, canvas);
-        controls.enableDamping = option_damping;
-
-        controls.autoRotate = true;
-        document.getElementById('render').addEventListener('click', function handleClick(event) {
-            controls.autoRotate = false;
-            event.currentTarget.removeEventListener('click', handleClick);
-        });
-
+        if (!option_fog && !option_performance) {
+            option_fog = "000-0";
+        }
+        if (!option_source) {
+            option_source = "/83e9aae8-7023-448e-83a6-53ccb377ec86";
+        }
 
         if (option_source.startsWith('/')) {
             option_source = 'https://lumalabs.ai/capture' + option_source;
         }
 
-        let splats = new LumaSplatsThree({
-            source: option_source,
-            loadingAnimationEnabled: true
-        });
-        scene.add(splats);
+        let canvas = document.querySelector('canvas');
 
-        splats.onLoad = () => {
-	    if (option_hint) {
-            	notify("info", "Movement", "Drag the page to look around<br>Hold shift while deagging to move");
-	    }
-            if (!option_fog && !option_mode == "object") {
-                splats.captureCubemap(renderer).then((capturedTexture) => {
-                    scene.environment = capturedTexture;
-                    scene.background = capturedTexture;
-                    scene.backgroundBlurriness = 0.5;
-                });
+        function main() {
+            let renderer = new WebGLRenderer({
+                canvas: canvas,
+                antialias: false,
+                enableThreeShaderIntegration: !option_performance
+            });
+
+            renderer.setSize(window.innerWidth, window.innerHeight, false);
+
+            let scene = new Scene();
+
+            let camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(2, 1.3, 4);
+
+            let controls = new OrbitControls(camera, canvas);
+            controls.enableDamping = option_damping;
+
+            controls.autoRotate = true;
+            document.getElementById('render').addEventListener('click', function handleClick(event) {
+                controls.autoRotate = false;
+                event.currentTarget.removeEventListener('click', handleClick);
+            });
+            document.getElementById('render').addEventListener('touchstart', function handleTouch(event) {
+                controls.autoRotate = false;
+                event.currentTarget.removeEventListener('touchstart', handleTouch);
+            });
+
+            let splats = new LumaSplatsThree({
+                source: option_source,
+                loadingAnimationEnabled: true
+            });
+            scene.add(splats);
+
+            splats.onLoad = () => {
+                if ((!option_fog || option_fog=="000-0") && option_mode != "object") {
+                    console.warn(option_fog)
+                    splats.captureCubemap(renderer).then((capturedTexture) => {
+                        scene.environment = capturedTexture;
+                        scene.background = capturedTexture;
+                        scene.backgroundBlurriness = 0.5;
+                    });
+                }
             }
+
+            setTimeout(() => {
+                if (controls.autoRotate) {
+                    if (ismobile()) {
+                        notify("info", "Camera controlls", "Drag the page to look around<br>Drag with two fingers to move");
+                    } else {
+                        notify("info", "Camera controlls", "Drag the page to look around<br>Hold shift while deagging to move");
+                    }
+                }
+            }, 2000);
+
+            if (option_mode == "back") {
+                splats.semanticsMask = LumaSplatsSemantics.BACKGROUND;
+            } else if (option_mode == "object") {
+                splats.semanticsMask = LumaSplatsSemantics.FOREGROUND;
+            }
+
+            if (option_fog) {
+                var fog = option_fog.split("-");
+                scene.fog = new FogExp2(new Color("#" + fog[0]).convertLinearToSRGB(), fog[1] / 100);
+                scene.background = scene.fog.color;
+            }
+
+            renderer.setAnimationLoop(() => {
+                controls.update();
+                renderer.render(scene, camera);
+            });
         }
 
-        if (option_mode == "back") {
-            splats.semanticsMask = LumaSplatsSemantics.BACKGROUND;
-        } else if (option_mode == "object") {
-            splats.semanticsMask = LumaSplatsSemantics.FOREGROUND;
-        }
-
-        if (option_fog) {
-            var fog = option_fog.split("-");
-            scene.fog = new FogExp2(new Color("#"+fog[0]).convertLinearToSRGB(), fog[1]/100);
-            scene.background = scene.fog.color;
-        }
-
-        renderer.setAnimationLoop(() => {
-            controls.update();
-            renderer.render(scene, camera);
-        });
+        window.main = main;
     </script>
 </body>
