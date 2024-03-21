@@ -5,7 +5,7 @@
         function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
 	
         var option_fog = "000-0"; // hexcolor-value - (do not include #)
-        var option_mode = "object"; // object, back, full - defines what to focus on (eg: object = remove background)
+        var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
         var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
         var option_damping = false;
         var option_performance = false; // does not work
