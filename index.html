@@ -451,7 +451,6 @@
 
             splats.onLoad = () => {
                 if ((!option_fog || option_fog=="000-0") && option_mode != "object") {
-                    console.warn(option_fog)
                     splats.captureCubemap(renderer).then((capturedTexture) => {
                         scene.environment = capturedTexture;
                         scene.background = capturedTexture;
