@@ -364,14 +364,14 @@
             }
             //notify("blank", "Debug", message);
         }
-        console.error = function (message) {
-            try {
-                notify("error", (message+"").split(": ")[0], (message+"").split(": ")[1]);
-            } catch(error) {
-                notify("error", "Error", message);
-            }
+        // console.error = function (message) {
+        //     try {
+        //         notify("error", (message+"").split(": ")[0], (message+"").split(": ")[1]);
+        //     } catch(error) {
+        //         notify("error", "Error", message);
+        //     }
             
-        }
+        // }
         console.warn = function (message) {
             notify("warning", "Warning", message);
         }
