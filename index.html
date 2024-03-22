@@ -1,16 +1,6 @@
 <head>
     <title>2024 robot for 5902</title>
     <link rel="icon" type="image/svg+xml" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAeCAYAAADdGWXmAAAAAXNSR0IArs4c6QAABYJJREFUSEutl3tQVFUcx7/nPpdFdmE1QBQVZcBBxUIMMR9raDo644Ps5UzlW5v6p2nKVDTNmfqjaaop+2cdoSknyHLG0XwDjrDGQ3ksiJjhMzEyyzJee+85J+/uXmZBYKHamTs7c8+5v8/5vb73dwkG9xMApAGIBnAaQNtgHieD2JzgCBeWOlOl5Q67EONu0A9fvKEXAKgAQAdiZyAwuygia3qi8uLMiXLW3DQpYkSsgNJGLy/2aHWF5/SC23fZQQAXQgH7gykApqcMl5+fPV5emDVZic9IkaCEcQgqB1EZbvxOcbLK217ioe6icj2/rQOHAbT0Be0NZtxLibNJz8xMVJc6k5VU5ySZ2OyAoDIfyIQZ/1AY6q9RHKvQ7hSVs5Nl1fTbB4c8AaC1J7QnbIRdFhZnjLJkz0pUZmalqOqIaMEHIT7IwzDzXgdhqLhAcbREbzrl5ocu/cS+A1AGQDehJiziQXU5p8RYXpiVYJnvHKc6Jo6SIXYZDw0jFv9B7rVTFFcyerSQnjtWyA/c/QPfm/k0YGlJkerqJ+Isi+YkhI1Jj1egWo2cBHsycJgZhavNFEeKeOvpUlZy7ATyNQ1fGrDlG1KiPliZYueOSCT4c9LT+OBhhg3I/P6+/ezWp5/zsqoarPPBNqU7XKsm2O0EqCThbJxoYUP/o2dcUHk5GE9yl3PH6zk0r6YuANuc6XCtSrVFBhLZTiRWJdrYVEFlSu+e+kvfXPNVZyBnosIaucQUwjDWsOeu5Hhjl55XcwFrfZ5tmRHlWp0WYcJ8TAL8Qqy0RbKxyYJlQGFsEVV2HYw/Hlzy7iqGN9+neTWNLACbY3etndod1vWAgEYpUlfFCJbQR+m3CxZaJYo8HRxqz94qrWZ46yMtt/ZSALZ1nt21LnNIN896PMSIjPNydGeyaOU2s6lFC68RFX0kAR/Wl2q4PQybPvPm1l42YQttrvUzwvuDmbb+EsPZRSVWi1KsukAISwylh6X1FFtcnXm1TWy1kbOncxZH7NngtIaEGZsNwSRDdU0M12XCeCgW3A0Um/Pac+uusTU+2PbsiD0bssL6hUkckCjxiQ8bRkEidQiEg9/ngNa3nrsbdWz9uiO37jr1w955NnzPxvm9w4y3pagTEMNgAMYfoYBd95e+wsD/JtBvi72+1dw/6sjZ35Zbf4v6w7hjhdX1yiJLVHBMjAVBB4gmALrhURAsWgdstFufQWSgN2V4r0tAUHTPNmnYdrA1t77ZhL1kdb26RO2CEQYInQTchPSExerAkO4ws6l5G0F7lQK9RfKd3X1Vw47jbXvrmzV/GHeusbhey1ajDAi8gj8HOvqGDdeB8N5hpq7qtyS0FofhjIdiZ1Hr3voWPyw7Z6Wyb+UCi8VhCQpZvzANCO9droJFXNOBgo9lfPKVnlfbrK0yYKlzJyvbp6QISzKSJSkzWYZKQngWpwHWvmFQOBquUJwqBPNUkOr8U/p7lOKAWbNWALNXOC27kuJJ2vQkmaSNkUB81Rd0BaoRIzXwgPCaEmbm7Nc/KY6XMHjK8fOhM+yTm7+xbwDcCOhtt74cHm0Tli2fpWxLjBFjn0xREG8XH6pGxHvBA7OICWsHw1mPDncJ7p8uo1+ca6J5AKoBGJVginuvIpD82FhpvfNRceP4YYp13ngVdkXo6jMy2gsm+wcfLjPUXNFR7GZa5Xl+4niddzeAIgCdoQae4HUZQMaSacrmCfHigvRYVchMUKBwAjLGCyZx3yhXWKFxTx1v2P9D54cd1DfK3RnMKNdzrw1A1stPqe8mRcoTZsSrJG4SRWGthupq1nKkRtt9856eD+ByKKEcyERs2hg9KlZ4btk05W3uheiuoQXnm7W9ACr/z/G7p4oZHxYx/+bD4h8JkNhUuTPB4wAAAABJRU5ErkJggg==" />
-    <script>
-        function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
-        
-        var option_fog = getpram("fog")"; // hexcolor-value - (do not include #)
-        var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
-        var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
-        var option_damping = false; // true to make the camera keep moving after input
-        var option_performance = false; // does not work
-	var option_hint = true; // do you want to show the movement hint by default?
-    </script>
     <style>
         body {
             background-color: black;
@@ -253,6 +243,15 @@
         } else {
             document.querySelector('.innertext').textContent = "Click to load model"
         }
+
+        function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
+        
+        var option_fog = getpram("fog")" || "000-0"; // hexcolor-value - (do not include #)
+        var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
+        var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
+        var option_damping = false; // true to make the camera keep moving after input
+        var option_performance = false; // does not work
+	var option_hint = true; // do you want to show the movement hint by default?
 
         var ran = false;
         function start() {
