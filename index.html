@@ -244,15 +244,6 @@
             document.querySelector('.innertext').textContent = "Click to load model"
         }
 
-        function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
-        
-        var option_fog = getpram("fog")" || "000-0"; // hexcolor-value - (do not include #)
-        var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
-        var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
-        var option_damping = false; // true to make the camera keep moving after input
-        var option_performance = false; // does not work
-	var option_hint = true; // do you want to show the movement hint by default?
-
         var ran = false;
         function start() {
             if (ran) {
@@ -411,6 +402,15 @@
         import { WebGLRenderer, PerspectiveCamera, Scene, Color, FogExp2 } from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         import { LumaSplatsSemantics, LumaSplatsThree } from "@lumaai/luma-web";
+
+        function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
+        
+        var option_fog = getpram("fog")" || "000-0"; // hexcolor-value - (do not include #)
+        var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
+        var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
+        var option_damping = false; // true to make the camera keep moving after input
+        var option_performance = false; // does not work
+	var option_hint = true; // do you want to show the movement hint by default?
 
         if (!option_fog && !option_performance) {
             option_fog = "000-0";
