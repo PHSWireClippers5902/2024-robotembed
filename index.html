@@ -1,270 +1,265 @@
-<head>
-    <title>2024 robot for 5902</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAeCAYAAADdGWXmAAAAAXNSR0IArs4c6QAABYJJREFUSEutl3tQVFUcx7/nPpdFdmE1QBQVZcBBxUIMMR9raDo644Ps5UzlW5v6p2nKVDTNmfqjaaop+2cdoSknyHLG0XwDjrDGQ3ksiJjhMzEyyzJee+85J+/uXmZBYKHamTs7c8+5v8/5vb73dwkG9xMApAGIBnAaQNtgHieD2JzgCBeWOlOl5Q67EONu0A9fvKEXAKgAQAdiZyAwuygia3qi8uLMiXLW3DQpYkSsgNJGLy/2aHWF5/SC23fZQQAXQgH7gykApqcMl5+fPV5emDVZic9IkaCEcQgqB1EZbvxOcbLK217ioe6icj2/rQOHAbT0Be0NZtxLibNJz8xMVJc6k5VU5ySZ2OyAoDIfyIQZ/1AY6q9RHKvQ7hSVs5Nl1fTbB4c8AaC1J7QnbIRdFhZnjLJkz0pUZmalqOqIaMEHIT7IwzDzXgdhqLhAcbREbzrl5ocu/cS+A1AGQDehJiziQXU5p8RYXpiVYJnvHKc6Jo6SIXYZDw0jFv9B7rVTFFcyerSQnjtWyA/c/QPfm/k0YGlJkerqJ+Isi+YkhI1Jj1egWo2cBHsycJgZhavNFEeKeOvpUlZy7ATyNQ1fGrDlG1KiPliZYueOSCT4c9LT+OBhhg3I/P6+/ezWp5/zsqoarPPBNqU7XKsm2O0EqCThbJxoYUP/o2dcUHk5GE9yl3PH6zk0r6YuANuc6XCtSrVFBhLZTiRWJdrYVEFlSu+e+kvfXPNVZyBnosIaucQUwjDWsOeu5Hhjl55XcwFrfZ5tmRHlWp0WYcJ8TAL8Qqy0RbKxyYJlQGFsEVV2HYw/Hlzy7iqGN9+neTWNLACbY3etndod1vWAgEYpUlfFCJbQR+m3CxZaJYo8HRxqz94qrWZ46yMtt/ZSALZ1nt21LnNIN896PMSIjPNydGeyaOU2s6lFC68RFX0kAR/Wl2q4PQybPvPm1l42YQttrvUzwvuDmbb+EsPZRSVWi1KsukAISwylh6X1FFtcnXm1TWy1kbOncxZH7NngtIaEGZsNwSRDdU0M12XCeCgW3A0Um/Pac+uusTU+2PbsiD0bssL6hUkckCjxiQ8bRkEidQiEg9/ngNa3nrsbdWz9uiO37jr1w955NnzPxvm9w4y3pagTEMNgAMYfoYBd95e+wsD/JtBvi72+1dw/6sjZ35Zbf4v6w7hjhdX1yiJLVHBMjAVBB4gmALrhURAsWgdstFufQWSgN2V4r0tAUHTPNmnYdrA1t77ZhL1kdb26RO2CEQYInQTchPSExerAkO4ws6l5G0F7lQK9RfKd3X1Vw47jbXvrmzV/GHeusbhey1ajDAi8gj8HOvqGDdeB8N5hpq7qtyS0FofhjIdiZ1Hr3voWPyw7Z6Wyb+UCi8VhCQpZvzANCO9droJFXNOBgo9lfPKVnlfbrK0yYKlzJyvbp6QISzKSJSkzWYZKQngWpwHWvmFQOBquUJwqBPNUkOr8U/p7lOKAWbNWALNXOC27kuJJ2vQkmaSNkUB81Rd0BaoRIzXwgPCaEmbm7Nc/KY6XMHjK8fOhM+yTm7+xbwDcCOhtt74cHm0Tli2fpWxLjBFjn0xREG8XH6pGxHvBA7OICWsHw1mPDncJ7p8uo1+ca6J5AKoBGJVginuvIpD82FhpvfNRceP4YYp13ngVdkXo6jMy2gsm+wcfLjPUXNFR7GZa5Xl+4niddzeAIgCdoQae4HUZQMaSacrmCfHigvRYVchMUKBwAjLGCyZx3yhXWKFxTx1v2P9D54cd1DfK3RnMKNdzrw1A1stPqe8mRcoTZsSrJG4SRWGthupq1nKkRtt9856eD+ByKKEcyERs2hg9KlZ4btk05W3uheiuoQXnm7W9ACr/z/G7p4oZHxYx/+bD4h8JkNhUuTPB4wAAAABJRU5ErkJggg==" />
-    <meta name="theme-color" content="#000000" />
-    <script>
-        function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
-        
-        var option_fog = getpram("fog"); // hexcolor-value - (do not include #)
-        var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
-        var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
-        var option_damping = false; // true to make the camera keep moving after input
-        var option_performance = false; // does not work
-	var option_hint = true; // do you want to show the movement hint by default?
-     </script>
-     <style>
-        body {
-            background-color: black;
-            color: white;
-            margin: 0px;
-            overflow: hidden;
-            font-family: 'Raleway', sans-serif;
-            display: table;
-            text-align: center;
-        }
-        #render {
-            width: 100%;
-            height: 100%;
-        }
-        .start {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0px;
-            left: 0px;
-        }
-        .start::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: url(https://source.unsplash.com/random);
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            filter: blur(40px) brightness(0.3);
-            z-index: -1;
-        }
-        .startingmessage {
-            border: 2px dashed grey;
-            pointer-events: none;
-            color: lightgrey;
-            position: fixed;
-            border-radius: 10px;
-            width: calc(100% - 40px);
-            height: calc(100% - 40px);
-            margin: 20px;
-            top: 0px;
-            left: 0px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .innertext {
-            position: absolute;
-            pointer-events: none;
-            font-size: 150%;
-        }
-        
-        @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i');
+<script>
+    function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
+    
+    var option_fog = getpram("fog"); // hexcolor-value - (do not include #)
+    var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
+    var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
+    var option_damping = false; // true to make the camera keep moving after input
+    var option_performance = false; // does not work
+var option_hint = true; // do you want to show the movement hint by default?
+    </script>
+    <style>
+    .luma {
+        background-color: #000000;
+        color: white;
+        margin: 0px;
+        overflow: hidden;
+        font-family: 'Raleway', sans-serif;
+        display: table;
+        text-align: center;
+        border-radius: 10px;
+        width:100%;
+        height:100%;
+    }
+    #render, #render2 {
+        background:#000000;
+        width:100%;
+        height:100%;
+    }
 
-        @keyframes bounceOutRight {
-            0% {
-                opacity: 1;
-            }
-            25% {
-                opacity: 1;
-                transform: translate3d(-40px, 0, 0);
-            }
-            100% {
-                opacity: 0;
-                transform: translate3d(400px, 0, 0);
-            }
-        }
-        @keyframes bounceInLeft {
-            20% {
-                opacity: 0;
-                transform: translate3d(400px, 0, 0);
-            }
-            70% {
-                opacity: 1;
-                transform: translate3d(-20px, 0, 0);
-            }
-            100% {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
+    @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i');
 
-        .bounceOutRight {
-            animation: bounceOutRight 0.6s;
+    @keyframes bounceOutRight {
+        0% {
+            opacity: 1;
         }
-        
-        .toast__container {
-            display: table-cell;
-            vertical-align: middle;
-            right: 10px;
-            position: fixed;
-            top: 0px;
-            display:inline-block;
+        25% {
+            opacity: 1;
+            transform: translate3d(-40px, 0, 0);
         }
-
-        .toast__cell{
+        100% {
             opacity: 0;
-            animation: bounceInLeft 0.6s ease forwards;
-            animation-fill-mode: forwards;
+            transform: translate3d(400px, 0, 0);
         }
-
-        .add-margin{
-            margin-top:20px;
+    }
+    @keyframes bounceInLeft {
+        20% {
+            opacity: 0;
+            transform: translate3d(400px, 0, 0);
         }
-
-        .toast__svg{
-            fill:#fff;
+        70% {
+            opacity: 1;
+            transform: translate3d(-20px, 0, 0);
         }
-
-        .toast {
-            text-align:left;
-            padding: 21px 0;
-            background-color: #333;
-            border-radius:4px;
-            max-width: 500px;
-            top: 0px;
-            position:relative;
-            box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+        100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
         }
-
-        .toast:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            border-top-left-radius:4px;
-            border-bottom-left-radius: 4px;
-
+    }
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
         }
-
-        .toast__icon{
-            position:absolute;
-            top:50%;
-            left:22px;
-            transform:translateY(-50%);
-            width:14px;
-            height:14px;
-            padding: 7px;
-            border-radius:50%;
-            display:inline-block;
+        100% {
+            opacity: 0;
         }
+    }
 
-        .toast__type {
-            color: #fff;
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 8px;
-        }
+    .bounceOutRight {
+        animation: bounceOutRight 0.6s;
+    }
+    
+    .toast__container {
+        display: table-cell;
+        vertical-align: middle;
+        right: 10px;
+        position: fixed;
+        top: 0px;
+        display:inline-block;
+    }
 
-        .toast__message {
-            font-size: 14px;
-            margin-top: 0;
-            margin-bottom: 0;
-            color: #9f9f9f;
-        }
+    .toast__cell{
+        opacity: 0;
+        animation: bounceInLeft 0.6s ease forwards;
+        animation-fill-mode: forwards;
+    }
 
-        .toast__content{
-            padding-left:70px;
-            padding-right:60px;
-        }
+    .add-margin{
+        margin-top:20px;
+    }
 
-        .toast__close {
-            position: absolute;
-            right: 22px;
-            top: 50%;
-            width: 14px;
-            cursor:pointer;
-            height: 14px;
-        fill:#878787;
-            transform: translateY(-50%);
-        }
+    .toast__svg{
+        fill:#fff;
+    }
 
-        .toast--green .toast__icon{
-            background-color:#2BDE3F;
-        }
+    .toast {
+        text-align:left;
+        padding: 21px 0;
+        background-color: #333;
+        border-radius:4px;
+        max-width: 500px;
+        top: 0px;
+        position:relative;
+        box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+    }
 
-        .toast--green:before{
-            background-color:#2BDE3F;
-        }
+    .toast:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        border-top-left-radius:4px;
+        border-bottom-left-radius: 4px;
 
-        .toast--blue .toast__icon{
-            background-color:#1D72F3;
-        }
+    }
 
-        .toast--blue:before{
-            background-color:#1D72F3;
-        }
+    .toast__icon{
+        position:absolute;
+        top:50%;
+        left:22px;
+        transform:translateY(-50%);
+        width:14px;
+        height:14px;
+        padding: 7px;
+        border-radius:50%;
+        display:inline-block;
+    }
 
-        .toast--yellow .toast__icon{
-            background-color:#FFC007;
-        }
+    .toast__type {
+        color: #fff;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
 
-        .toast--yellow:before{
-            background-color:#FFC007;
-        }
+    .toast__message {
+        font-size: 14px;
+        margin-top: 0;
+        margin-bottom: 0;
+        color: #9f9f9f;
+    }
 
-        .toast--red .toast__icon{
-            background-color:rgb(221, 40, 40);
-        }
+    .toast__content{
+        padding-left:70px;
+        padding-right:60px;
+    }
 
-        .toast--red:before{
-            background-color:rgb(221, 40, 40);
-        }
+    .toast__close {
+        position: absolute;
+        right: 22px;
+        top: 50%;
+        width: 14px;
+        cursor:pointer;
+        height: 14px;
+    fill:#878787;
+        transform: translateY(-50%);
+    }
 
-        .toast--grey:before{
-            background-color:grey;
-        }
-        
-        .toast--grey .toast__icon{
-            background-color:grey;
-        }
-    </style>
-</head>
-<body>
-    <canvas id="render"></canvas>
-    <div onclick="start();" class="start">
-        <p class="startingmessage"><span class="innertext"><noscript>Enable Javascript</noscript></span></p>
-    </div>
+    .toast--green .toast__icon{
+        background-color:#2BDE3F;
+    }
 
-    <div class="toast__container"></div>
+    .toast--green:before{
+        background-color:#2BDE3F;
+    }
+
+    .toast--blue .toast__icon{
+        background-color:#1D72F3;
+    }
+
+    .toast--blue:before{
+        background-color:#1D72F3;
+    }
+
+    .toast--yellow .toast__icon{
+        background-color:#FFC007;
+    }
+
+    .toast--yellow:before{
+        background-color:#FFC007;
+    }
+
+    .toast--red .toast__icon{
+        background-color:rgb(221, 40, 40);
+    }
+
+    .toast--red:before{
+        background-color:rgb(221, 40, 40);
+    }
+
+    .toast--grey:before{
+        background-color:grey;
+    }
+    
+    .toast--grey .toast__icon{
+        background-color:grey;
+    }
+</style>
+<div class="luma">
+    <canvas id="render2"></canvas>
+    <canvas id="render" style="display:none;"></canvas>
+
+    <div class="toast__container" hidden></div>
     <script>
         function ismobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
+
+        document.getElementById('render2').addEventListener('click', function handleClick(event) {
+            start()
+        });
+        document.getElementById('render2').addEventListener('touchstart', function handleTouch(event) {
+            start()
+        });
+
+        const myCanvas = document.getElementById('render2');
+        const myContext = myCanvas.getContext('2d');
+
+        const img = new Image();
+        img.src = 'https://phswireclippers5902.github.io/2024-robotembed/robot.png';
+
+        myContext.canvas.width = window.innerWidth;
+        myContext.canvas.height = window.innerHeight;
+
+        myContext.font = '40pt Calibri, sans-serif, white';
+        myContext.fillStyle = "#fff";
+        myContext.textAlign = "center";
+
         if (ismobile()) {
-            document.querySelector('.innertext').textContent = "Tap to load model"
+            myContext.fillText('Tap to load model', myCanvas.width / 2, myCanvas.height / 2);
         } else {
-            document.querySelector('.innertext').textContent = "Click to load model"
+            myContext.fillText('Click to load model', myCanvas.width / 2, myCanvas.height / 2);
         }
+
+        img.onload = () => {
+            const centerX = myCanvas.width / 2;
+            const centerY = myCanvas.height / 2;
+
+            myContext.filter = "blur(20px) brightness(50%)";
+            myContext.drawImage(img, centerX - img.width / 2, centerY - img.height / 2);
+            myContext.filter = "blur(0px)";
+
+            if (ismobile()) {
+                myContext.fillText('Tap to load model', centerX, centerY);
+            } else {
+                myContext.fillText('Click to load model', centerX, centerY);
+            }
+        };
 
         var ran = false;
         function start() {
             if (ran) {
                 return;
             } ran = true;
-            main();
-            var elm = document.querySelector('.start')
+            var elm = document.querySelector('#render2');
             elm.style.animation = 'fadeOut 0.6s';
             setTimeout(() => {
                 elm.remove();
+                document.querySelector('#render').style.display = "block";
+                var page = document.querySelector('.luma');
+                main();
             }, 550);
         }
     </script>
@@ -425,7 +420,7 @@
             option_source = 'https://lumalabs.ai/capture' + option_source;
         }
 
-        let canvas = document.querySelector('canvas');
+        let canvas = document.querySelector('#render');
 
         function main() {
             let renderer = new WebGLRenderer({
@@ -519,4 +514,4 @@
 
         window.main = main;
     </script>
-</body>
+</div>
