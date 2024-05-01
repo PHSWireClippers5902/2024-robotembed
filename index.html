@@ -1,13 +1,153 @@
-<script>
-    function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
-    
-    var option_fog = getpram("fog"); // hexcolor-value - (do not include #)
-    var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
-    var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
-    var option_damping = false; // true to make the camera keep moving after input
-    var option_performance = false; // does not work
-var option_hint = true; // do you want to show the movement hint by default?
+
+    <script type="importmap">
+            {
+                "imports": {
+                    "three": "https://unpkg.com/three@0.157.0/build/three.module.js",
+                    "three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/",
+                    "@lumaai/luma-web": "https://unpkg.com/@lumaai/luma-web@0.2.0/dist/library/luma-web.module.js"
+                }
+            }
     </script>
+    <script type="module">
+        import { WebGLRenderer, PerspectiveCamera, Scene, Color, FogExp2 } from 'https://unpkg.com/three@0.157.0/build/three.module.js';
+        import { OrbitControls } from 'https://unpkg.com/three@0.157.0/examples/jsm/controls/OrbitControls.js';
+        import { LumaSplatsSemantics, LumaSplatsThree } from "https://unpkg.com/@lumaai/luma-web@0.2.0/dist/library/luma-web.module.js";
+
+        function getpram(param) { const urlParams = new URLSearchParams(window.location.search); return urlParams.get(param); }
+
+        var option_fog = getpram("fog"); // hexcolor-value - (do not include #)
+        var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
+        var option_source = getpram("source") || "/2c2f462b-be1a-4d0d-bf74-0975dba73d49";
+        var option_damping = false; // true to make the camera keep moving after input
+        var option_performance = false; // does not work
+        var option_hint = true; // do you want to show the movement hint by default?
+
+        if (!option_fog && !option_performance) {
+            option_fog = "000-0";
+        }
+        if (!option_source) {
+            option_source = "/83e9aae8-7023-448e-83a6-53ccb377ec86";
+        }
+
+        if (option_source.startsWith('/')) {
+            option_source = 'https://lumalabs.ai/capture' + option_source;
+        }
+
+        let canvas = document.querySelector('#render');
+
+        function main() {
+            let renderer = new WebGLRenderer({
+                canvas: canvas,
+                antialias: false,
+                enableThreeShaderIntegration: !option_performance
+            });
+
+            renderer.setSize(window.innerWidth, window.innerHeight, false);
+
+            let scene = new Scene();
+
+            let camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(2, 1.3, 4);
+
+            let controls = new OrbitControls(camera, canvas);
+            controls.enableDamping = option_damping;
+
+            controls.autoRotate = true;
+            document.getElementById('render').addEventListener('click', function handleClick(event) {
+                controls.autoRotate = false;
+                event.currentTarget.removeEventListener('click', handleClick);
+            });
+            document.getElementById('render').addEventListener('touchstart', function handleTouch(event) {
+                controls.autoRotate = false;
+                event.currentTarget.removeEventListener('touchstart', handleTouch);
+            });
+
+            let splats = new LumaSplatsThree({
+                source: option_source,
+                loadingAnimationEnabled: true
+            });
+            scene.add(splats);
+
+            splats.onLoad = () => {
+                if ((!option_fog || option_fog == "000-0") && option_mode != "object") {
+                    if (option_fog == "000-0") {
+                        setTimeout(() => {
+                            splats.captureCubemap(renderer).then((capturedTexture) => {
+                                scene.background = capturedTexture;
+                                scene.backgroundBlurriness = 0.5;
+                            });
+                            setTimeout(() => {
+                                scene.fog = null;
+                                setTimeout(() => {
+                                    splats.captureCubemap(renderer).then((capturedTexture) => {
+                                        scene.environment = capturedTexture;
+                                        scene.background = capturedTexture;
+                                        scene.backgroundBlurriness = 0.5;
+                                    });
+                                }, 100);
+                            }, 250);
+                        }, 500);
+                    } else {
+                        splats.captureCubemap(renderer).then((capturedTexture) => {
+                            scene.environment = capturedTexture;
+                            scene.background = capturedTexture;
+                            scene.backgroundBlurriness = 0.5;
+                        });
+                    }
+                }
+            }
+
+            setTimeout(() => {
+                if (controls.autoRotate) {
+                    if (ismobile()) {
+                        notify("info", "Camera Controls", "Drag the page to look around<br>Drag with two fingers to move");
+                    } else {
+                        notify("info", "Camera Controls", "Drag the page to look around<br>Hold shift while dragging to move");
+                    }
+                }
+            }, 2000);
+
+            if (option_mode == "back") {
+                splats.semanticsMask = LumaSplatsSemantics.BACKGROUND;
+            } else if (option_mode == "object") {
+                splats.semanticsMask = LumaSplatsSemantics.FOREGROUND;
+            }
+
+            if (option_fog) {
+                var fog = option_fog.split("-");
+                scene.fog = new FogExp2(new Color("#" + fog[0]).convertLinearToSRGB(), fog[1] / 100);
+                scene.background = scene.fog.color;
+            }
+
+            renderer.setAnimationLoop(() => {
+                controls.update();
+                renderer.render(scene, camera);
+            });
+        }
+
+        document.getElementById('render2').addEventListener('click', function handleClick(event) {
+            start()
+        });
+        document.getElementById('render2').addEventListener('touchstart', function handleTouch(event) {
+            start()
+        });
+
+        var ran = false;
+        function start() {
+            if (ran) {
+                return;
+            } ran = true;
+            var elm = document.querySelector('#render2');
+            elm.style.animation = 'fadeOut 0.6s';
+            setTimeout(() => {
+                elm.remove();
+                document.querySelector('#render').style.display = "block";
+                var page = document.querySelector('.luma');
+                main();
+            }, 550);
+        }
+    </script>
+
     <style>
     .luma {
         background-color: #000000;
@@ -196,6 +336,8 @@ var option_hint = true; // do you want to show the movement hint by default?
     .toast--grey .toast__icon{
         background-color:grey;
     }
+
+    body{width:100vw;height:100vh;margin:0px;}
 </style>
 <div class="luma">
     <canvas id="render2"></canvas>
@@ -206,13 +348,6 @@ var option_hint = true; // do you want to show the movement hint by default?
         function ismobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
-
-        document.getElementById('render2').addEventListener('click', function handleClick(event) {
-            start()
-        });
-        document.getElementById('render2').addEventListener('touchstart', function handleTouch(event) {
-            start()
-        });
 
         const myCanvas = document.getElementById('render2');
         const myContext = myCanvas.getContext('2d');
@@ -247,21 +382,6 @@ var option_hint = true; // do you want to show the movement hint by default?
                 myContext.fillText('Click to load model', centerX, centerY);
             }
         };
-
-        var ran = false;
-        function start() {
-            if (ran) {
-                return;
-            } ran = true;
-            var elm = document.querySelector('#render2');
-            elm.style.animation = 'fadeOut 0.6s';
-            setTimeout(() => {
-                elm.remove();
-                document.querySelector('#render').style.display = "block";
-                var page = document.querySelector('.luma');
-                main();
-            }, 550);
-        }
     </script>
     <script>
     function notify(type, title, content) {
@@ -393,125 +513,5 @@ var option_hint = true; // do you want to show the movement hint by default?
             const warningMessage = message.split(": ")[1];
             notify("warning", message.split(": ")[0], warningMessage);
         }
-    </script>
-
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://unpkg.com/three@0.157.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/",
-            "@lumaai/luma-web": "https://unpkg.com/@lumaai/luma-web@0.2.0/dist/library/luma-web.module.js"
-        }
-    }
-    </script>
-    <script type="module">
-        import { WebGLRenderer, PerspectiveCamera, Scene, Color, FogExp2 } from 'three';
-        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-        import { LumaSplatsSemantics, LumaSplatsThree } from "@lumaai/luma-web";
-
-        if (!option_fog && !option_performance) {
-            option_fog = "000-0";
-        }
-        if (!option_source) {
-            option_source = "/83e9aae8-7023-448e-83a6-53ccb377ec86";
-        }
-
-        if (option_source.startsWith('/')) {
-            option_source = 'https://lumalabs.ai/capture' + option_source;
-        }
-
-        let canvas = document.querySelector('#render');
-
-        function main() {
-            let renderer = new WebGLRenderer({
-                canvas: canvas,
-                antialias: false,
-                enableThreeShaderIntegration: !option_performance
-            });
-
-            renderer.setSize(window.innerWidth, window.innerHeight, false);
-
-            let scene = new Scene();
-
-            let camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(2, 1.3, 4);
-
-            let controls = new OrbitControls(camera, canvas);
-            controls.enableDamping = option_damping;
-
-            controls.autoRotate = true;
-            document.getElementById('render').addEventListener('click', function handleClick(event) {
-                controls.autoRotate = false;
-                event.currentTarget.removeEventListener('click', handleClick);
-            });
-            document.getElementById('render').addEventListener('touchstart', function handleTouch(event) {
-                controls.autoRotate = false;
-                event.currentTarget.removeEventListener('touchstart', handleTouch);
-            });
-
-            let splats = new LumaSplatsThree({
-                source: option_source,
-                loadingAnimationEnabled: true
-            });
-            scene.add(splats);
-
-            splats.onLoad = () => {
-                if ((!option_fog || option_fog=="000-0") && option_mode != "object") {
-                    if (option_fog == "000-0") {
-                        setTimeout(() => {
-                            splats.captureCubemap(renderer).then((capturedTexture) => {
-                                scene.background = capturedTexture;
-                                scene.backgroundBlurriness = 0.5;
-                            });
-                            setTimeout(() => {
-                                scene.fog = null;
-                                setTimeout(() => {
-                                    splats.captureCubemap(renderer).then((capturedTexture) => {
-                                        scene.environment = capturedTexture;
-                                        scene.background = capturedTexture;
-                                        scene.backgroundBlurriness = 0.5;
-                                    });
-                                }, 100);
-                            }, 250);
-                        }, 500);
-                    } else {
-                        splats.captureCubemap(renderer).then((capturedTexture) => {
-                            scene.environment = capturedTexture;
-                            scene.background = capturedTexture;
-                            scene.backgroundBlurriness = 0.5;
-                        });
-                    }
-                }
-            }
-
-            setTimeout(() => {
-                if (controls.autoRotate) {
-                    if (ismobile()) {
-                        notify("info", "Camera Controls", "Drag the page to look around<br>Drag with two fingers to move");
-                    } else {
-                        notify("info", "Camera Controls", "Drag the page to look around<br>Hold shift while dragging to move");
-                    }
-                }
-            }, 2000);
-
-            if (option_mode == "back") {
-                splats.semanticsMask = LumaSplatsSemantics.BACKGROUND;
-            } else if (option_mode == "object") {
-                splats.semanticsMask = LumaSplatsSemantics.FOREGROUND;
-            }
-
-            if (option_fog) {
-                var fog = option_fog.split("-");
-                scene.fog = new FogExp2(new Color("#" + fog[0]).convertLinearToSRGB(), fog[1] / 100);
-                scene.background = scene.fog.color;
-            }
-
-            renderer.setAnimationLoop(() => {
-                controls.update();
-                renderer.render(scene, camera);
-            });
-        }
-
-        window.main = main;
     </script>
 </div>
