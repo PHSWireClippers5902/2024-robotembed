@@ -1,7 +1,7 @@
 <head>
     <script>
         function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
-
+        
         var option_fog = getpram("fog"); // hexcolor-value - (do not include #)
         var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
         var option_source = getpram("source");
@@ -29,6 +29,7 @@
             height: 100%;
             top: 0px;
             left: 0px;
+            transition: opacity 0.5s linear;
         }
         .start::before {
             content: '';
@@ -72,7 +73,7 @@
             }
             25% {
                 opacity: 1;
-                transform: translate3d(-40px, 0, 0);
+                transform: translate3d(-50px, 0, 0);
             }
             100% {
                 opacity: 0;
@@ -109,7 +110,8 @@
         .toast__container {
             display: table-cell;
             vertical-align: middle;
-            right: 10px;
+            right: 15px;
+            max-width: calc(100% - 30px);
             position: fixed;
             top: 0px;
             display:inline-block;
@@ -180,12 +182,12 @@
 
         .toast__content{
             padding-left:70px;
-            padding-right:60px;
+            padding-right:70px;
         }
 
         .toast__close {
             position: absolute;
-            right: 22px;
+            right: 30px;
             top: 50%;
             width: 14px;
             cursor:pointer;
@@ -233,6 +235,57 @@
         .toast--grey .toast__icon{
             background-color:grey;
         }
+
+        @media (max-width: 500px) {
+            .toast:before {
+              display: none;
+            }
+            .toast {
+              width: 100%;
+              border-radius: 0px;
+            }
+            .toast__container {
+              top: -20px;
+              right: 0px;
+              width: 100%;
+              max-width: 100%;
+            }
+          @keyframes bounceOutRight {
+              0% {
+                  opacity: 1;
+              }
+              25% {
+                  opacity: 1;
+                  transform: translate3d(0, 30px, 0);
+              }
+              100% {
+                  opacity: 0;
+                  transform: translate3d(0, -200px, 0);
+              }
+          }
+          @keyframes bounceInLeft {
+              20% {
+                  opacity: 0;
+                  transform: translate3d(0, -200px, 0);
+              }
+              70% {
+                  opacity: 1;
+                  transform: translate3d(0, 20px, 0);
+              }
+              100% {
+                  opacity: 1;
+                  transform: translate3d(0, 0, 0);
+              }
+          }
+        }
+        @media (max-width: 350px) {
+          .toast__close {
+            display: none;
+          }
+          .toast__content {
+            padding-right: 0px;
+          }
+        }
     </style>
 </head>
 <body>
@@ -251,6 +304,12 @@
         } else {
             document.querySelector('.innertext').textContent = "Click to load model"
         }
+        
+        document.querySelector('.start').style.opacity = "0%";
+        setTimeout(function() {
+          document.querySelector('.start').style.opacity = "100%";
+          notify("info", "Camera Controls", "Drag the page to look around<br>Drag with two fingers to move");
+        }, 500);
 
         var ran = false;
         function start() {
@@ -259,7 +318,7 @@
             } ran = true;
             main();
             var elm = document.querySelector('.start')
-            elm.style.animation = 'fadeOut 0.6s';
+            elm.style.opacity = '0%';
             setTimeout(() => {
                 elm.remove();
             }, 550);
@@ -359,12 +418,12 @@
             });
         });
 
-        setTimeout(() => {
-            toastCell.style.animation = 'bounceOutRight 0.6s';
-            setTimeout(() => {
-                toastCell.remove();
-            }, 550);
-        }, 5000);
+        // setTimeout(() => {
+        //     toastCell.style.animation = 'bounceOutRight 0.6s';
+        //     setTimeout(() => {
+        //         toastCell.remove();
+        //     }, 550);
+        // }, 5000);
     }
 
         console.log = function (message) {
