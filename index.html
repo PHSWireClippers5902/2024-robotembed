@@ -1,7 +1,7 @@
 <head>
     <script>
-        function getpram(param) {const urlParams = new URLSearchParams(window.location.search);return urlParams.get(param);}
-        
+        function getpram(param) {const urlParams = new URLSearchParams(window.location.search); return urlParams.get(param);}
+
         var option_fog = getpram("fog"); // hexcolor-value - (do not include #)
         var option_mode = getpram("mode") || "object"; // object, back, full - defines what to focus on (eg: object = remove background)
         var option_source = getpram("source");
@@ -107,7 +107,7 @@
         .bounceOutRight {
             animation: bounceOutRight 0.6s;
         }
-        
+
         .toast__container {
             display: table-cell;
             vertical-align: middle;
@@ -118,17 +118,17 @@
             display:inline-block;
         }
 
-        .toast__cell{
+        .toast__cell {
             opacity: 0;
             animation: bounceInLeft 0.6s ease forwards;
             animation-fill-mode: forwards;
         }
 
-        .add-margin{
+        .add-margin {
             margin-top:20px;
         }
 
-        .toast__svg{
+        .toast__svg {
             fill:#fff;
         }
 
@@ -155,7 +155,7 @@
 
         }
 
-        .toast__icon{
+        .toast__icon {
             position:absolute;
             top:50%;
             left:22px;
@@ -181,7 +181,7 @@
             color: #9f9f9f;
         }
 
-        .toast__content{
+        .toast__content {
             padding-left:70px;
             padding-right:70px;
         }
@@ -193,99 +193,99 @@
             width: 14px;
             cursor:pointer;
             height: 14px;
-        fill:#878787;
+            fill:#878787;
             transform: translateY(-50%);
         }
 
-        .toast--green .toast__icon{
+        .toast--green .toast__icon {
             background-color:#2BDE3F;
         }
 
-        .toast--green:before{
+        .toast--green:before {
             background-color:#2BDE3F;
         }
 
-        .toast--blue .toast__icon{
+        .toast--blue .toast__icon {
             background-color:#1D72F3;
         }
 
-        .toast--blue:before{
+        .toast--blue:before {
             background-color:#1D72F3;
         }
 
-        .toast--yellow .toast__icon{
+        .toast--yellow .toast__icon {
             background-color:#FFC007;
         }
 
-        .toast--yellow:before{
+        .toast--yellow:before {
             background-color:#FFC007;
         }
 
-        .toast--red .toast__icon{
+        .toast--red .toast__icon {
             background-color:rgb(221, 40, 40);
         }
 
-        .toast--red:before{
+        .toast--red:before {
             background-color:rgb(221, 40, 40);
         }
 
-        .toast--grey:before{
+        .toast--grey:before {
             background-color:grey;
         }
         
-        .toast--grey .toast__icon{
+        .toast--grey .toast__icon {
             background-color:grey;
         }
 
         @media (max-width: 500px) {
             .toast:before {
-              display: none;
+                display: none;
             }
             .toast {
-              width: 100%;
-              border-radius: 0px;
+                width: 100%;
+                border-radius: 0px;
             }
             .toast__container {
-              top: -21px;
-              right: 0px;
-              width: 100%;
-              max-width: 100%;
+                top: -21px;
+                right: 0px;
+                width: 100%;
+                max-width: 100%;
             }
-          @keyframes bounceOutRight {
-              0% {
-                  opacity: 1;
-              }
-              25% {
-                  opacity: 1;
-                  transform: translate3d(0, 30px, 0);
-              }
-              100% {
-                  opacity: 0;
-                  transform: translate3d(0, -200px, 0);
-              }
-          }
-          @keyframes bounceInLeft {
-              20% {
-                  opacity: 0;
-                  transform: translate3d(0, -200px, 0);
-              }
-              70% {
-                  opacity: 1;
-                  transform: translate3d(0, 20px, 0);
-              }
-              100% {
-                  opacity: 1;
-                  transform: translate3d(0, 0, 0);
-              }
-          }
+            @keyframes bounceOutRight {
+                0% {
+                    opacity: 1;
+                }
+                25% {
+                    opacity: 1;
+                    transform: translate3d(0, 30px, 0);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate3d(0, -200px, 0);
+                }
+            }
+            @keyframes bounceInLeft {
+                20% {
+                    opacity: 0;
+                    transform: translate3d(0, -200px, 0);
+                }
+                70% {
+                    opacity: 1;
+                    transform: translate3d(0, 20px, 0);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translate3d(0, 0, 0);
+                }
+            }
         }
         @media (max-width: 350px) {
-          .toast__close {
-            display: none;
-          }
-          .toast__content {
-            padding-right: 0px;
-          }
+            .toast__close {
+                display: none;
+            }
+            .toast__content {
+                padding-right: 0px;
+            }
         }
     </style>
 </head>
@@ -305,17 +305,17 @@
         } else {
             document.querySelector('.innertext').textContent = window.location.hash != "#reload"?"Click to load model":"Click to reload model";
         }
-        
+
         var nomsg = document.cookie.split('; ').find(row => row.startsWith('nomsg='))?.split('=')[1] || false;
         setInterval(function() {
-          var nomsgtmp = document.cookie.split('; ').find(row => row.startsWith('nomsg='))?.split('=')[1] || false;
-          if (nomsgtmp) nomsg = nomsgtmp;
-          if (window.location.hash == "#reload") nomsg = true;
+            var nomsgtmp = document.cookie.split('; ').find(row => row.startsWith('nomsg='))?.split('=')[1] || false;
+            if (nomsgtmp) nomsg = nomsgtmp;
+            if (window.location.hash == "#reload") nomsg = true;
         }, 1000);
 
         document.querySelector('.start').style.opacity = window.location.hash == "#reload"?"100%":"0%";
         setTimeout(function() {
-          document.querySelector('.start').style.opacity = "100%";
+            document.querySelector('.start').style.opacity = "100%";
         }, 500);
 
         var ran = false;
@@ -331,8 +331,8 @@
             }, 550);
             document.addEventListener("visibilitychange", () => {
                 if (document.hidden && option_deload) {
-                  window.location.hash = "reload";
-                  setTimeout(function() {window.location.reload()}, 500);
+                    window.location.hash = "reload";
+                    setTimeout(function() {window.location.reload()}, 500);
                 }
             });
         }
@@ -496,7 +496,7 @@
 
         let canvas = document.querySelector('canvas');
 
-        function main() {
+        window.main = function() {
             let renderer = new WebGLRenderer({
                 canvas: canvas,
                 antialias: false,
@@ -530,7 +530,7 @@
             scene.add(splats);
 
             splats.onLoad = () => {
-                if ((!option_fog || option_fog=="000-0") && option_mode != "object") {
+                if ((!option_fog || option_fog == "000-0") && option_mode != "object") {
                     if (option_fog == "000-0") {
                         setTimeout(() => {
                             splats.captureCubemap(renderer).then((capturedTexture) => {
@@ -559,7 +559,7 @@
             }
 
             setTimeout(() => {
-              document.cookie = "nomsg=true; max-age=3";
+                document.cookie = "nomsg=true; max-age=3";
                 if (controls.autoRotate && !nomsg) {
                     if (ismobile()) {
                         notify("info", "Camera Controls", "Drag the page to look around<br>Drag with two fingers to move");
@@ -586,7 +586,5 @@
                 renderer.render(scene, camera);
             });
         }
-
-        window.main = main;
     </script>
 </body>
