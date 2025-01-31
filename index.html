@@ -7,6 +7,7 @@
         var option_source = getpram("source");
         var option_damping = false; // true to make the camera keep moving after input
         var option_performance = false; // does not work
+        var option_deload = true; // do you want the embed to deload when the user looks at a different tab?
       	var option_hint = true; // do you want to show the movement hint by default?
      </script>
      <style>
@@ -304,6 +305,13 @@
         } else {
             document.querySelector('.innertext').textContent = window.location.hash != "#reload"?"Click to load model":"Click to reload model";
         }
+        
+        var nomsg = document.cookie.split('; ').find(row => row.startsWith('nomsg='))?.split('=')[1] || false;
+        setInterval(function() {
+          var nomsgtmp = document.cookie.split('; ').find(row => row.startsWith('nomsg='))?.split('=')[1] || false;
+          if (nomsgtmp) nomsg = nomsgtmp;
+          if (window.location.hash == "#reload") nomsg = true;
+        }, 1000);
 
         document.querySelector('.start').style.opacity = window.location.hash == "#reload"?"100%":"0%";
         setTimeout(function() {
@@ -322,7 +330,7 @@
                 elm.remove();
             }, 550);
             document.addEventListener("visibilitychange", () => {
-                if (document.hidden) {
+                if (document.hidden && option_deload) {
                   window.location.hash = "reload";
                   setTimeout(function() {window.location.reload()}, 500);
                 }
@@ -551,7 +559,8 @@
             }
 
             setTimeout(() => {
-                if (controls.autoRotate) {
+              document.cookie = "nomsg=true; max-age=3";
+                if (controls.autoRotate && !nomsg) {
                     if (ismobile()) {
                         notify("info", "Camera Controls", "Drag the page to look around<br>Drag with two fingers to move");
                     } else {
