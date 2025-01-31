@@ -324,7 +324,7 @@
             document.addEventListener("visibilitychange", () => {
                 if (document.hidden) {
                   location.hash = "reload";
-                  location.reload();
+                  location.href = location.href;
                 }
             });
         }
