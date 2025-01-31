@@ -5,7 +5,7 @@ A live version of this is online on [our website](https://wireclippers.org/robot
 
 ## How to Use
 When adding models to the website, place this html into the website and set the "robot" property to the id of the model on [lumalabs](https://lumalabs.ai/featured). <br>
-`Ex: 2c2f462b-be1a-4d0d-bf74-0975dba73d49 (SS Craig)`
+Ex: `2c2f462b-be1a-4d0d-bf74-0975dba73d49` (SS Craig)
 
 ```html
 <div class="is-style-srctangulat wp-block-jetpack-tiled-gallary alighcenter" style="height: 400px; background: black; border-radius: 15px;">
