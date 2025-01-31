@@ -305,7 +305,7 @@
             document.querySelector('.innertext').textContent = window.location.hash != "#reload"?"Click to load model":"Click to reload model";
         }
 
-        document.querySelector('.start').style.opacity = "0%";
+        document.querySelector('.start').style.opacity = window.location.hash == "100%"?"0%";
         setTimeout(function() {
           document.querySelector('.start').style.opacity = "100%";
         }, 500);
