@@ -245,7 +245,7 @@
               border-radius: 0px;
             }
             .toast__container {
-              top: -20px;
+              top: -21px;
               right: 0px;
               width: 100%;
               max-width: 100%;
@@ -321,6 +321,9 @@
             setTimeout(() => {
                 elm.remove();
             }, 550);
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) location.reload();
+            });
         }
     </script>
     <script>
