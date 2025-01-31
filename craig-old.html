@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<!-- This is code related to how WordPress handles embeds. Do not change. -->
-<title>Craig the Robot | 2024</title>
+<!-- This code is out of date and only stays because it might be needed in the future -->
+
+
+
+
+<!-- This figure code is related to how WordPress handles embeds. Do not change. -->
 <figure class="wp-block-embed"><div class="wp-block-embed__wrapper">
 
 <canvas style="width:100%;height:100%;"></canvas>
 
-<!-- three.js file setup -->
+<!-- import libs like three.js and luma splats -->
 <script type="importmap">
 {
 	"imports": {
@@ -37,10 +40,11 @@
     let controls = new OrbitControls(camera, canvas);
     controls.enableDamping = false;
 
-  <!-- Dominick left this as false.  Let the record show that Lex (business team) wants to turn this on simply so visitors are aware this is an interactable object -->
+  // Dominick left this as false. Let the record show that Lex (business team) wants to turn this on simply so visitors are aware this is an interactable object
+  // note from dom: this is false because no way to stop rotating has been implemented in this version
     controls.autoRotate = false;
 
-  <!-- We're hosting this off LumaLabs. As of now, there are no plans in place to change this. -->
+  // We're hosting the model on LumaLabs. As of now, there are no plans in place to change this.
     let splats = new LumaSplatsThree({
         source: 'https://lumalabs.ai/capture/2c2f462b-be1a-4d0d-bf74-0975dba73d49',
         loadingAnimationEnabled: true
@@ -55,11 +59,12 @@
         });
     }
 
+    // Remove background splats
     splats.semanticsMask = LumaSplatsSemantics.FOREGROUND;
     // splats.semanticsMask = LumaSplatsSemantics.BACKGROUND;
 
-    // scene.fog = new FogExp2(new Color(0xe0e1ff).convertLinearToSRGB(), 0.15);
-    // scene.background = scene.fog.color;
+    scene.fog = new FogExp2(new Color(0xe0e1ff).convertLinearToSRGB(), 0.015);
+    scene.background = scene.fog.color;
 
     renderer.setAnimationLoop(() => {
         controls.update();
@@ -67,5 +72,4 @@
     });
 </script>
 
-<!-- This is code related to how WordPress handles embeds. Do not change. -->
 </div></figure>
