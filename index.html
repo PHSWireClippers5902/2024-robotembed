@@ -316,9 +316,45 @@
         }, 1000);
 
         document.querySelector('.start').style.opacity = window.location.hash == "#reload"?"100%":"0%";
-        setTimeout(function() {
-            document.querySelector('.start').style.opacity = "100%";
-        }, 500);
+
+        try {
+            setTimeout(function() {
+                async function fetchArtifactUrl(url) {
+                    const response = await fetch(`https://webapp.engineeringlumalabs.com/api/v3/captures/${url}/public`);
+                    const data = await response.json();
+                    return data.response.artifacts.find(artifact => artifact.type === "thumb").url;
+                }
+
+                var imgurl = option_source.replace("https://lumalabs.ai/capture", "");
+                if (!imgurl) {
+                    imgurl = "7f763b07-15bc-430e-84bf-9825f8e0c89e";
+                } else if (imgurl.startsWith('/')) {
+                    imgurl = imgurl.substring(1);
+                }
+
+                fetchArtifactUrl(imgurl).then(function(img) {
+                    if (!img) {
+                        document.querySelector('.start').style.opacity = "100%";
+                        return;
+                    }
+
+                    const style = document.createElement('style');
+                    style.textContent = `   .start::before {
+        background: url(${img});
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        filter: blur(10px) brightness(0.3);
+    }`;
+                    document.head.appendChild(style);
+                    document.querySelector('.start').style.opacity = "100%";
+                });
+            }, 500);
+        } catch(err) {
+            setTimeout(function() {
+                document.querySelector('.start').style.opacity = "100%";
+            }, 500);
+        }
 
         var ran = false;
         function start() {
