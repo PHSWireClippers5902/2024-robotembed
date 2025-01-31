@@ -300,9 +300,9 @@
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
         if (ismobile()) {
-            document.querySelector('.innertext').textContent = window.location.hash != "reload"?"Tap to load model":"Tap to reload model";
+            document.querySelector('.innertext').textContent = window.location.hash != "#reload"?"Tap to load model":"Tap to reload model";
         } else {
-            document.querySelector('.innertext').textContent = window.location.hash != "reload"?"Click to load model":"Click to reload model";
+            document.querySelector('.innertext').textContent = window.location.hash != "#reload"?"Click to load model":"Click to reload model";
         }
 
         document.querySelector('.start').style.opacity = "0%";
@@ -323,8 +323,8 @@
             }, 550);
             document.addEventListener("visibilitychange", () => {
                 if (document.hidden) {
-                  location.hash = "reload";
-                  location.href = location.href;
+                  window.location.hash = "reload";
+                  setTimeout(function() {window.location.reload()}, 500);
                 }
             });
         }
