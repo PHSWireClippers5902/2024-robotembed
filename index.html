@@ -308,7 +308,6 @@
         document.querySelector('.start').style.opacity = "0%";
         setTimeout(function() {
           document.querySelector('.start').style.opacity = "100%";
-          notify("info", "Camera Controls", "Drag the page to look around<br>Drag with two fingers to move");
         }, 500);
 
         var ran = false;
@@ -418,12 +417,12 @@
             });
         });
 
-        // setTimeout(() => {
-        //     toastCell.style.animation = 'bounceOutRight 0.6s';
-        //     setTimeout(() => {
-        //         toastCell.remove();
-        //     }, 550);
-        // }, 5000);
+        setTimeout(() => {
+            toastCell.style.animation = 'bounceOutRight 0.6s';
+            setTimeout(() => {
+                toastCell.remove();
+            }, 550);
+        }, 5000);
     }
 
         console.log = function (message) {
