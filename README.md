@@ -4,12 +4,12 @@ An embed for loading models of the robots used on the website. We're putting the
 A live version of this is online on [our website](https://wireclippers.org/robots).
 
 ## How to Use
-When adding models to the website, place this html into the website and set the "robot" property to the id of the model on [lumalabs](https://lumalabs.ai/featured). <br>
+When adding models to the website, place this html into the website and set the "src" property to the id of the model on [lumalabs](https://lumalabs.ai/featured). <br>
 Ex: `2c2f462b-be1a-4d0d-bf74-0975dba73d49` (SS Craig)
 
 ```html
 <div class="is-style-srctangulat wp-block-jetpack-tiled-gallary alighcenter" style="height: 400px; background: black; border-radius: 15px;">
-  <model3 robot="PlaceRobotLinkHere" \>
+  <model3 src="PlaceRobotLinkHere" \>
 </div>
 ```
 
@@ -26,7 +26,7 @@ If the script isn't included at the end of the page, some model3 elements will n
 <script> // Include this at the end of the page for all model3 elements to load
   document.querySelectorAll('model3').forEach(function(player) {
   	var modeliframe = document.createElement('iframe');
-  	modeliframe.src = `https://phswireclippers5902.github.io/2024-robotembed?source=${player.getAttribute('robot')}`;
+  	modeliframe.src = `https://phswireclippers5902.github.io/2024-robotembed?source=${player.getAttribute('src')}`;
   	modeliframe.style.margin = "auto";
   	modeliframe.style.border = "none";
   	modeliframe.style.width = "100%";
